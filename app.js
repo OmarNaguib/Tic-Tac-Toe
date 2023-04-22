@@ -2,6 +2,10 @@
 const gameboard =(() =>{
     const values = Array(9).fill(null);
 
+    function updateValue(index,sign){
+        values[index]=sign
+    }
+
     const _rows = function () {
         const rows=[]
         for (let i=0;i<9;i+=3) {
@@ -33,35 +37,50 @@ const gameboard =(() =>{
         return [..._rows(),..._columns(),..._diagonals()]
     }
     return {
-        getLines
+        getLines,
+        updateValue,
+
     }
 })();
 
 const game =(() =>{
     let turn ="x"
-
+    const checkWin= (lines) =>{
+        for (let i=0;i<lines.length;i++) {
+            if (lines[i].toString() == Array(3).fill("x").toString()) return "x"
+            if (lines[i].toString() == Array(3).fill("y").toString()) return "y"
+        }
+    }
+    const checkGameStatus=() => {
+        const lines=gameboard.getLines()
+        const win=checkWin(lines);
+        console.log(win)
+        // checkDraw(lines);
+    }
     const alternateTurn = () =>{
         if (turn==="x") turn="o"
         else turn="x"
     }
     function squareClick(e) {
         e.target.textContent=turn
-        // e.target.disabled=true
         e.target.removeEventListener("click",squareClick)
+        gameboard.updateValue(this,turn)
         alternateTurn()
+        checkGameStatus();
     }
     
 
-    const createSquare = () => {
+    const createSquare = (index) => {
         const square = document.createElement("button");
         square.classList.add("square")
-        square.addEventListener("click",squareClick)
+        square.dataset.index=index
+        square.addEventListener("click",squareClick.bind(index))
         return square
     }
     const newGame = () =>{
         const container = document.querySelector(".container")
-        for (let i=1;i<=9;i++) {
-            const square=createSquare();
+        for (let i=0;i<9;i++) {
+            const square=createSquare(i);
             container.appendChild(square);
         }
 

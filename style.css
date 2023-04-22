@@ -1,15 +1,76 @@
+@font-face {
+    font-family: "handwriting";
+    src: url("Fonts/journal-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+:root{
+    --color-x:rgb(250, 93, 93);
+    --color-o:mediumspringgreen;
+    --color-dark:#991b1b;
+    --color-light:#fca5a5;
+}
+h1{}
+
+
 html,body{
     height: 100vh;
 }
 body{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    background-color: var(--color-light);
+    padding: 50px;
+    border-radius: 25px;
+
+    
+}
+
+
 .container{
     display: grid;
-    grid-template-columns: 50px 50px 50px;
-    grid-template-rows: 50px 50px 50px;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+
+    
+    
+}
+main>.title{
+    font-family: "Roboto";
+    background-color: var(--color-dark);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color:var(--color-light);
+}
+
+
+.container>button{
+    padding: 0px;
+    font-family: "handwriting";
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.x{
+    color: var(--color-x);
+    background-color: var(--color-o);
+}
+
+.o{
+    color: var(--color-o);
+    background-color: var(--color-x);
 }

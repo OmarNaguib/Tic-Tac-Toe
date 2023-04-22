@@ -87,9 +87,11 @@ const game =(() =>{
         displayOutput();
     }
     const squareClick=(e) => {
-        e.target.textContent=turn
-        e.target.removeEventListener("click",squareClick)
-        gameboard.updateValue(e.target.dataset.index,turn)
+        const square=e.target;
+        square.textContent=turn
+        square.classList.add(turn)
+        square.removeEventListener("click",squareClick)
+        gameboard.updateValue(square.dataset.index,turn)
         alternateTurn()
         const [gameover,winner] = checkGameStatus();
         if (gameover) endGame();

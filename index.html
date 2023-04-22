@@ -5,32 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="app.js" defer></script>
     <title>Document</title>
 </head>
 <body>
-    <div class="names">
-        <div>
-            <label for="player-x">X:</label>
-            <input type="text" id="player-x" value="Player 1">
+
+    <main>
+        <div class="title"><h1>Tic Tac Toe</h1></div class="title">
+        <div class="names">
+            <div>
+                <label for="player-x">X:</label>
+                <input type="text" id="player-x" value="Player 1">
+            </div>
+            <div>
+                <label for="player-o">O:</label>
+                <input type="text" id="player-o" value="Player 2">
+            </div>
+        </div>
+        <div class="container">
+        
         </div>
         <div>
-            <label for="player-o">O:</label>
-            <input type="text" id="player-o" value="Player 2">
+            <button class="new" onclick="game.newGame()"> New Game</button>
         </div>
-    </div>
-
-    <div class="container">
+        <div class="display">
         
-    </div>
-
-    <div>
-        <button class="new" onclick="game.newGame()"> New Game</button>
-    </div>
-
-    <div class="display">
+        </div>
         
-    </div>
-    
+    </main>
 </body>
 </html>

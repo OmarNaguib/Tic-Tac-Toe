@@ -76,16 +76,13 @@ const game =(() =>{
         if (turn==="x") turn="o"
         else turn="x"
     }
-    const removeListeners = () =>{
+    const removeListeners = (functionName) =>{
         const buttons= document.querySelectorAll(".square")
         buttons.forEach(button=>{
-            button.removeEventListener("click",squareClick)
+            button.removeEventListener("click",functionName)
         })
     }
-    const endGame = () =>{
-        removeListeners();
-        displayOutput();
-    }
+
     const squareClick=(e) => {
         const square=e.target;
         square.textContent=turn
@@ -94,7 +91,9 @@ const game =(() =>{
         gameboard.updateValue(square.dataset.index,turn)
         alternateTurn()
         const [gameover,winner] = checkGameStatus();
-        if (gameover) endGame();
+        if (gameover) {
+            removeListeners(squareClick)
+        };
     }
     
 
@@ -149,6 +148,6 @@ const playerFactory = (nameInput) =>{
 
 game.newGame();
 const playerX=playerFactory("player-x")
-const playerY=playerFactory("player-o")
+const playerO=playerFactory("player-o")
 
 

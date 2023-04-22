@@ -121,27 +121,26 @@ const game =(() =>{
     }
 })();
 
+const playerPrototype =(()=>{
+    function changeName(e) {
+        this.name=e.target.value
+    } 
+
+    return{
+        changeName
+    }
+})();
+
 const playerFactory = (nameInput) =>{
     const input=document.querySelector(`#${nameInput}`)
     let name=input.value;
 
-
-    function changeName(e){
-        console.log(name)
-        this.name=e.target.value;
-        console.log(name)
-    }
-
-    
-
-    input.addEventListener("input",changeName)
-
-
-
-
-    return{
+    return Object.assign({
         name,
-    }
+    },playerPrototype,
+    { change(value){
+        this.name=value
+    }})
 }
 
 
@@ -149,5 +148,16 @@ const playerFactory = (nameInput) =>{
 game.newGame();
 const playerX=playerFactory("player-x")
 const playerO=playerFactory("player-o")
+
+const xName=document.querySelector("#player-x")
+const oName=document.querySelector("#player-o")
+
+xName.addEventListener("input",(e)=>{
+    playerX.changeName(e)
+})
+
+oName.addEventListener("input",(e)=>{
+    playerO.changeName(e)
+})
 
 

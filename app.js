@@ -120,15 +120,33 @@ const game =(() =>{
     }
 })();
 
-const playerFactory = (number,sign) =>{
+const playerFactory = (nameInput) =>{
+    const input=document.querySelector(`#${nameInput}`)
+    let name=input.value;
+
+
+    function changeName(e){
+        console.log(name)
+        this.name=e.target.value;
+        console.log(name)
+    }
+
+    
+
+    input.addEventListener("input",changeName)
+
+
+
+
     return{
-        number,sign
+        name,
     }
 }
 
 
-playerOne=playerFactory(1,"x")
-playerTwo=playerFactory(2,"o")
+
 game.newGame();
+const playerX=playerFactory("player-x")
+const playerY=playerFactory("player-o")
 
 

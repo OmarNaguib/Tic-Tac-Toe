@@ -51,7 +51,7 @@ const game =(() =>{
     const checkWin= (lines) =>{
         for (let i=0;i<lines.length;i++) {
             if (lines[i].toString() == Array(3).fill("x").toString()) return "x"
-            if (lines[i].toString() == Array(3).fill("y").toString()) return "y"
+            if (lines[i].toString() == Array(3).fill("o").toString()) return "o"
         }
     }
 
@@ -82,7 +82,18 @@ const game =(() =>{
             button.removeEventListener("click",functionName)
         })
     }
+    const displayResult = (winner) =>{
+        const display = document.querySelector(".display")
+        if (winner==="x") {
+            console.log("here")
+            display.textContent=playerX.name+" Wins!!"
+        }
+        else if (winner==="o"){
+            display.textContent=playerO.name+" Wins!!"
+        }
+        else display.textContent="It's a draw"
 
+    }
     const squareClick=(e) => {
         const square=e.target;
         square.textContent=turn
@@ -92,7 +103,10 @@ const game =(() =>{
         alternateTurn()
         const [gameover,winner] = checkGameStatus();
         if (gameover) {
+            console.log([gameover,winner])
             removeListeners(squareClick)
+            displayResult(winner)
+            alternateTurn();
         };
     }
     
@@ -135,12 +149,7 @@ const playerFactory = (nameInput) =>{
     const input=document.querySelector(`#${nameInput}`)
     let name=input.value;
 
-    return Object.assign({
-        name,
-    },playerPrototype,
-    { change(value){
-        this.name=value
-    }})
+    return {name,...playerPrototype}
 }
 
 

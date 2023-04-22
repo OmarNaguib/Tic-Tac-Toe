@@ -32,6 +32,7 @@ main{
     background-color: var(--color-light);
     padding: 50px;
     border-radius: 25px;
+    width: 400px;
 
     
 }

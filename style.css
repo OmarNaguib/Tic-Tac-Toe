@@ -10,7 +10,6 @@
     --color-dark:#991b1b;
     --color-light:#fca5a5;
 }
-h1{}
 
 
 html,body{
@@ -24,6 +23,7 @@ body{
 
 
 main{
+    font-family: "Roboto";
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,17 +36,7 @@ main{
     
 }
 
-
-.container{
-    display: grid;
-    grid-template-columns: repeat(3,100px);
-    grid-template-rows: repeat(3,100px);
-
-    
-    
-}
 main>.title{
-    font-family: "Roboto";
     background-color: var(--color-dark);
     width: 100%;
     display: flex;
@@ -54,6 +44,29 @@ main>.title{
     color:var(--color-light);
 }
 
+main .names{
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    color: var(--color-dark);
+    font-size: 20px;
+}
+
+main .names input{
+    border-style: none;
+    background-color: #e98686;
+    font-size: 20px;
+    width: 150px;
+    border-radius: 5px;
+    color: var(--color-dark);
+}
+
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+}
 
 .container>button{
     padding: 0px;
@@ -73,4 +86,21 @@ main>.title{
 .o{
     color: var(--color-o);
     background-color: var(--color-x);
+}
+
+main .new{
+    width: 200px;
+    height: 75px;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-light);
+    background-color: var(--color-dark);
+    border-style: none;
+}
+
+main .display{
+    height: 100px;
+    font-family: "handwriting";
+    font-size: 100px;
 }

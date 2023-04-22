@@ -1,0 +1,14 @@
+html,body{
+    height: 100vh;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+}

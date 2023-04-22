@@ -33,20 +33,36 @@ const gameboard =(() =>{
         return [..._rows(),..._columns(),..._diagonals()]
     }
     return {
-        _rows,
-        _columns,
-        _diagonals,
         getLines
     }
 })();
 
 const game =(() =>{
+    let turn ="x"
+
+    const alternateTurn = () =>{
+        if (turn==="x") turn="o"
+        else turn="x"
+    }
+    function squareClick(e) {
+        e.target.textContent=turn
+        // e.target.disabled=true
+        e.target.removeEventListener("click",squareClick)
+        alternateTurn()
+    }
+    
+
+    const createSquare = () => {
+        const square = document.createElement("button");
+        square.classList.add("square")
+        square.addEventListener("click",squareClick)
+        return square
+    }
     const newGame = () =>{
         const container = document.querySelector(".container")
         for (let i=1;i<=9;i++) {
-            let square = document.createElement("button");
-            square.classList.add("square")
-            container.appendChild(square)
+            const square=createSquare();
+            container.appendChild(square);
         }
 
     }
@@ -55,9 +71,15 @@ const game =(() =>{
     }
 })();
 
-const playerFactory = (number) =>{
-
+const playerFactory = (number,sign) =>{
+    return{
+        number,sign
+    }
 }
 
+
+playerOne=playerFactory(1,"x")
+playerTwo=playerFactory(2,"o")
 game.newGame();
+
 

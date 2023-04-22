@@ -51,22 +51,44 @@ const game =(() =>{
             if (lines[i].toString() == Array(3).fill("y").toString()) return "y"
         }
     }
+
+    const checkDraw = (lines) => {
+        for (let i=0;i<lines.length;i++) {
+            for (let j=0;j<3;j++) {
+                if (lines[i][j] === null) return false
+            }
+        }
+        return "draw"
+    }
+
+
     const checkGameStatus=() => {
         const lines=gameboard.getLines()
         const win=checkWin(lines);
-        console.log(win)
-        // checkDraw(lines);
+        const draw=checkDraw(lines);
+
+        return [!!(win||draw),win||draw]
     }
     const alternateTurn = () =>{
         if (turn==="x") turn="o"
         else turn="x"
     }
-    function squareClick(e) {
+    const removeListeners = () =>{
+        const buttons= document.querySelectorAll(".square")
+        buttons.forEach(button=>{
+            button.removeEventListener("click",squareClick)
+        })
+    }
+    const endGame = () =>{
+        removeListeners();
+    }
+    const squareClick=(e) => {
         e.target.textContent=turn
         e.target.removeEventListener("click",squareClick)
-        gameboard.updateValue(this,turn)
+        gameboard.updateValue(e.target.dataset.index,turn)
         alternateTurn()
-        checkGameStatus();
+        const [gameover,winner] = checkGameStatus();
+        if (gameover) endGame();
     }
     
 
@@ -74,7 +96,7 @@ const game =(() =>{
         const square = document.createElement("button");
         square.classList.add("square")
         square.dataset.index=index
-        square.addEventListener("click",squareClick.bind(index))
+        square.addEventListener("click",squareClick)
         return square
     }
     const newGame = () =>{
@@ -87,6 +109,8 @@ const game =(() =>{
     }
     return{
         newGame,
+        removeListeners,
+        squareClick,
     }
 })();
 

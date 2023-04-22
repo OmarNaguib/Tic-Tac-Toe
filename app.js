@@ -1,7 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 const gameboard =(() =>{
-    const values = Array(9).fill(null);
-
+    let values = Array(9).fill(null);
+    const createNew = () => {
+        values = Array(9).fill(null)
+    }
     function updateValue(index,sign){
         values[index]=sign
     }
@@ -39,6 +41,7 @@ const gameboard =(() =>{
     return {
         getLines,
         updateValue,
+        createNew,
 
     }
 })();
@@ -81,6 +84,7 @@ const game =(() =>{
     }
     const endGame = () =>{
         removeListeners();
+        displayOutput();
     }
     const squareClick=(e) => {
         e.target.textContent=turn
@@ -100,7 +104,9 @@ const game =(() =>{
         return square
     }
     const newGame = () =>{
+        gameboard.createNew();
         const container = document.querySelector(".container")
+        container.innerHTML=""
         for (let i=0;i<9;i++) {
             const square=createSquare(i);
             container.appendChild(square);
